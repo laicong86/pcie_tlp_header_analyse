@@ -1,10 +1,16 @@
 # PCIe TLP Header 解析器
 
+[![Release](https://img.shields.io/github/v/release/laicong86/pcie_tlp_header_analyse?label=release)](https://github.com/laicong86/pcie_tlp_header_analyse/releases/latest)
+[![Platform](https://img.shields.io/badge/platform-Windows%20x64-blue)](https://github.com/laicong86/pcie_tlp_header_analyse/releases/latest)
+[![Python](https://img.shields.io/badge/python-3.8%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+
 一个基于 Python + tkinter 的小工具：输入一段 TLP Header（4 个 DW 的十六进制），
 按 **Non-Flit Mode** 或 **Flit Mode** 解析出全部字段，给出长度统计与校验提示。
 
 字段定义、位号与编码表均取自 *PCI Express® Base Specification Revision 7.0* §2.2.1，
 整理说明见同目录的 `TLP_Header_格式解析说明.md`。
+
+> **下载** ｜ [**PCIe_TLP_Header_Parser.exe**](https://github.com/laicong86/pcie_tlp_header_analyse/releases/latest/download/PCIe_TLP_Header_Parser.exe) 免安装单文件 · Windows x64 · 约 7.95 MB ｜ [全部版本](https://github.com/laicong86/pcie_tlp_header_analyse/releases) ｜ 源码运行：`python main.py`（需 Python 3.8+）
 
 ---
 
@@ -12,7 +18,7 @@
 
 ### 方式一：直接运行 exe（无需安装 Python）
 
-双击 `dist\PCIe_TLP_Header_Parser.exe` 即可，单文件、免安装、不依赖 Python 环境。
+从 [Releases](https://github.com/laicong86/pcie_tlp_header_analyse/releases/latest) 下载 `PCIe_TLP_Header_Parser.exe` 后双击即可，单文件、免安装、不依赖 Python 环境。
 
 > 启动时会把运行时解压到临时目录，首次约 3 秒、之后约 2~3 秒。
 > 若被安全软件拦截，属于 PyInstaller 单文件程序的常见误报，添加信任即可。
@@ -20,12 +26,12 @@
 ### 方式二：从源码运行
 
 ```bat
-cd /d D:\ai_coding\pcie_tlp_anly
+git clone git@github.com:laicong86/pcie_tlp_header_analyse.git
+cd pcie_tlp_header_analyse
 py -3 main.py
 ```
 
-> 需要带 tkinter 的 Python 3.8+。本机 `python`（WorkBuddy 内置解释器）没有 tkinter，
-> 请用系统解释器 `py -3`（Python 3.9，自带 tk 8.6）。
+> 需要带 tkinter 的 Python 3.8+。Windows 上建议用系统解释器 `py -3`（自带 tkinter）；
 
 界面用法：
 
@@ -139,8 +145,8 @@ Figure 2-20 ~ 2-22，待后续补充。
 ## 用代码直接调用
 
 ```python
-import sys
-sys.path.insert(0, r"D:\ai_coding\pcie_tlp_anly")
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # 工程根目录
 from tlp.parser import parse
 
 header = bytes.fromhex("60010001 00000000 00000010 9488BC00".replace(" ", ""))
