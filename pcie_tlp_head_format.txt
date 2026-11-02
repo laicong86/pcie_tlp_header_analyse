@@ -1,0 +1,3 @@
+参考D:\workspace\协议 下的 NCB-PCI_Express_Base_7.0.pdf
+目标：分析2.2.1 Common Packet Header Fields章节，输出flit mode  non-flit mode两种TLP header的格式规则。用于后续开发工具达到输入TLP，完成解析的功能
+输出：在当前目录下输出一个TLP header格式解析说明文档
